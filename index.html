@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array .from() and .of()</title>
+</head>
+  <div class="people">
+    <p>Wes</p>
+    <p>Kait</p>
+    <p>Snickers</p>
+  </div>
+<body>
+<script>
+
+	/* 
+	* Note that Array.of and Array.from are not on the Array prototype
+	* 
+	* Recall that prototype stuff shows up after creating an object, while
+	* stuff like Array.of and Array.from are on the Array itself.
+	*/
+
+	// Array.from takes something that it is array-ish and turn it into an array.
+	// Anything with a length property
+
+	const people = document.querySelectorAll('.people p');
+
+	// people will be a node list, it will have a length, but not the array
+	// methods.
+
+	/*
+	 * Notice that Array.from takes a second argument, which is a map function
+	 */
+	const peopleArray = Array.from(people, person => {
+		console.log(person);
+		return person.textContent;
+	});
+	// This console.log will just be the array of names because of the usage of 
+	// map function in the second arg of Array.from above.
+	console.log(peopleArray);
+
+	// const names = people.map(person => person.textContent);
+
+
+	/* Next example ... Using Array.from to convert arguments to an array */
+
+	function sumAll() {
+		const nums = Array.from(arguments);
+		return nums.reduce((prev, next) => prev + next, 0);
+	}
+
+	sumAll(2, 34, 23, 234, 234, 234234, 234234, 2342);
+
+	/* Next example, use Array.of turns stuff into an Array.of */
+	const ages = Array.of(12,4,23,62,34);
+	console.log(ages);
+
+</script>
+</body>
+</html>
